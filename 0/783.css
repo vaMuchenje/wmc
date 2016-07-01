@@ -1,0 +1,36 @@
+@media (max-width:959px)
+{
+.m723_el1
+{
+      width: 748px;
+      height: 423px;
+}
+}
+
+@media (min-width:768px) and (max-width:959px)
+{
+.m723_el1
+{
+      width: 748px;
+      height: 423px;
+}
+}
+
+@media (max-width:959px)
+{
+.m723_el2
+{
+      width: 422px;
+      height: 423px;
+}
+}
+
+@media (min-width:768px) and (max-width:959px)
+{
+.m723_el2
+{
+      width: 422px;
+      height: 423px;
+}
+}
+

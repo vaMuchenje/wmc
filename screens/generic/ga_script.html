@@ -1,0 +1,87 @@
+
+var _gaq = _gaq || [];
+ _gaq.push(['_setAccount', g_gaAccountNo]);
+ _gaq.push(['_trackPageview']);
+
+ var _gaB9LTimer = _gaB9LTimer;
+
+   //sdasd
+ var globals_webappPath="";
+ try
+ { 
+   window.onload=init;
+ }
+ catch(e)
+ {
+ };
+ 
+ function clearB9LTimer()
+ {
+   if( null != _gaB9LTimer )
+   {
+      clearTimeout( _gaB9LTimer );
+      _gaB9LTimer = null;
+   }
+ }
+
+
+ function initB9LGoogleAnalytics()
+ {
+   clearB9LTimer();
+
+   var onUnloadFx = function()
+   {
+     if( null != _gaB9LTimer )
+     {
+       clearB9LTimer();
+       _gaB9LExecute();
+     }
+   };
+   crossbrowser_attachEvent( window,  "onunload", onUnloadFx );
+
+   _gaB9LTimer = setTimeout( "_gaB9LDelayExecute(0)", 3*1000 );
+ }
+
+
+ function _gaB9LDelayExecute( execCnt )
+ {
+   if( null == _gaB9LTimer )
+   {
+     return;
+   }
+
+   execCnt++;
+
+   var titleLoadingKey = "...";
+   var pageTitle = document.title;
+   if( execCnt < 11 && ( null == pageTitle || "" == pageTitle || 
+                 ( pageTitle.length >= titleLoadingKey.length && 
+                          pageTitle.lastIndexOf( titleLoadingKey ) == pageTitle.length - titleLoadingKey.length 
+                        )
+                      ) 
+     )
+   {
+      _gaB9LTimer = setTimeout( "_gaB9LDelayExecute(" + execCnt + ")", 1000 );
+      return;
+   }
+
+   _gaB9LExecute();
+ }
+
+
+ function _gaB9LExecute()
+ {
+   _gaB9LTimer = null;
+
+   (
+     function() 
+     {
+       var ga = document.createElement('script'); 
+       ga.type = 'text/javascript'; 
+       ga.async = true;
+       ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+
+       (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(ga);
+     }
+   )();
+ }

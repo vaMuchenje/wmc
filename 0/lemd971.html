@@ -1,0 +1,83 @@
+
+
+function Scroller(){this.orientation;this.holderClass;this.controlCass;this.previousClass;this.nextClass;this.name;this.container;}
+;Scroller.prototype=new ScrollerBase();function ScrollerBase(){
+this.init=function(container){this.currentTile=0;this.container=container;container.scrollerObj=this;this.dimValue=(this.orientation&&this.orientation=="vertical")?"Height":"Width";this.name=(this.name)?this.name:(this.dimValue=="Height")?"verticalDefault":"horizontalDefault";this.holderClass=(this.holderClass)?this.holderClass:"a-meta-hs-holder";this.controlClass=(this.controlClass)?this.controlClass:"a-meta-hs-controls";this.previousClass=(this.previousClass)?this.previousClass:"a-meta-hs-previous";this.nextClass=(this.nextClass)?this.nextClass:"a-meta-hs-next";this.buildControls(container);CssUtil.addClassToEl(container.firstElementChild,this.holderClass);var thisObj=this;var setSize=function(){var controlFx=function(){thisObj.showTile(null,container.firstElementChild);}
+;setTimeout(controlFx,500);}
+;E.add(window,"resize",setSize);}
+;
+this.buildControls=function(parentEl){var controls=cE("ul");CssUtil.addClassToEl(controls,this.controlClass);CssUtil.addClassToEl(controls,"a_skip");var thisObj=this;for(var i=0;i<2;i++)
+{var control=cE("li");if(i==0){CssUtil.addClassToEl(control,this.previousClass);control.scrollerValue="previous";this.previousControl=control;}
+
+else 
+{CssUtil.addClassToEl(control,this.nextClass);control.scrollerValue="next";this.nextControl=control;}
+
+var showTile=function(e){thisObj.showTile(e.target.scrollerValue,parentEl.firstElementChild);}
+;E.add(control,"click",showTile);aE(controls,control);}
+
+this.setControlVisibility(0,parentEl["scroll"+this.dimValue],parentEl["offset"+this.dimValue]);aE(parentEl,controls);}
+;
+this.showTile=function(movement,tileContainer){var marginStyle=(this.dimValue!="Height")?"marginLeft":"marginTop";var currentMargin=(tileContainer.style[marginStyle]=="")?0:0-parseInt(tileContainer.style[marginStyle].replace("px",""));var tileSize=tileContainer.parentNode["offset"+this.dimValue];var lastMargin=currentMargin;if(null==movement){currentMargin=0;}
+
+else if(movement=="next"){currentMargin+=tileSize;this.currentTile++;}
+
+else 
+{currentMargin-=tileSize;this.currentTile--;}
+
+if(currentMargin>=tileContainer["scroll"+this.dimValue]){currentMargin=tileContainer["scroll"+this.dimValue]-tileSize;this.currentTile=(currentMargin<=lastMargin)?this.currentTile-1:this.currentTile;}
+
+else if(currentMargin<=0){currentMargin=0;this.currentTile=0;}
+
+this.setControlVisibility(currentMargin,tileContainer["scroll"+this.dimValue],tileSize);currentMargin=0-currentMargin;tileContainer.style[marginStyle]=currentMargin+"px";}
+;
+this.setControlVisibility=function(currentMargin,scrollValue,offsetValue){if(!(this.nextControl&&this.previousControl)){return ;}
+
+var prevStyle=this.previousControl.style;var nextStyle=this.nextControl.style;if(scrollValue<=offsetValue){prevStyle.display="none";nextStyle.display="none";return ;}
+
+if(currentMargin<=0){prevStyle.display="none";nextStyle.display="";return ;}
+
+if(currentMargin+offsetValue<scrollValue){prevStyle.display="";nextStyle.display="";return ;}
+
+nextStyle.display="none";prevStyle.display="";}
+;
+this.deleteScroller=function(){this.container.scrollerObj=null;if(!this.container&&!this.container.firstElementChild){return ;}
+
+CssUtil.removeClassFromEl(this.container.firstElementChild,this.holderClass);if(!this.previousControl&&!this.nextControl){return ;}
+
+this.previousControl.parentNode.parentNode.removeChild(this.previousControl.parentNode);}
+;
+this.initDefaultSettings=function(){var horizontalSc=
+{
+orientation:"horizontal"
+}
+;A.register("ScrollOptions","horizontalDefault",horizontalSc);var verticalSc=
+{
+orientation:"vertical"
+}
+;A.register("ScrollOptions","verticalDefault",verticalSc);var transitionClass=new CssClass(".a-meta-hs-holder")
+transitionClass.add("webkit-transition","all 0.5s ease");transitionClass.add("moz-transition","all 0.5s ease");transitionClass.add("ms-transition","all 0.5s ease");transitionClass.add("transition","all 0.5s ease");transitionClass.init();var controlHolderClass=new CssClass(".a-meta-hs-controls > li");controlHolderClass.add("list-style","none");controlHolderClass.add("position","absolute");controlHolderClass.add("width","0");controlHolderClass.add("height","0");controlHolderClass.add("z-index","10000");controlHolderClass.add("cursor","pointer");var nextClass=new CssClass(".a-meta-hs-next");var previousClass=new CssClass(".a-meta-hs-previous");if(this.dimValue!="Height"){controlHolderClass.add("top","40%");controlHolderClass.add("border-top","20px solid transparent");controlHolderClass.add("border-bottom","20px solid transparent");nextClass.add("border-left","20px solid rgba(255,255,255,0.5)");nextClass.add("right","10px");previousClass.add("border-right","20px solid rgba(255,255,255,0.5)");previousClass.add("left","10px");}
+
+else 
+{controlHolderClass.add("left","40%");controlHolderClass.add("border-left","20px solid transparent");controlHolderClass.add("border-right","20px solid transparent");nextClass.add("border-top","20px solid rgba(255,255,255,0.5)");nextClass.add("bottom","10px");previousClass.add("border-bottom","20px solid rgba(255,255,255,0.5)");previousClass.add("top","10px");}
+
+controlHolderClass.init();previousClass.init();nextClass.init();}
+;this.initDefaultSettings();}
+;
+
+;var ScrollHandler=new ScrollHandlerBase();function ScrollHandlerBase(){
+this.init=function(actionData,data){var el=gE("#"+data.elId);var scroller=new Scroller();this.assignAttributes(scroller,actionData);if(el.scrollerObj){el.scrollerObj.deleteScroller();}
+
+scroller.init(el);}
+;this.assignAttributes=function(scroller,actionData){for(var i in actionData)
+{scroller[i]=actionData[i];}
+
+}
+;}
+;ActionHandler.registerAction("scrollHandler",ScrollHandler);
+CONTENT_MARKER_BEGIN='vml.41gp0Sf-ugwSjllVheowmdv';
+
+function redirectToMaster(){if((!g_params.mode||g_params.mode!="visual_edit")&&g_params.fu!="master-page"&&window.top==window){window.location="/master-page#"+g_params.fu;}
+
+}
+;redirectToMaster();
+CONTENT_MARKER_END='vml.41gp0Sf-ugwSjllVheowmdv';

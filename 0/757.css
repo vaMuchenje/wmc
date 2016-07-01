@@ -1,0 +1,101 @@
+.m697_el1
+{
+      width: 727px;
+      height: 540px;
+      text-align: left;
+      vertical-align: top;
+      background-image: url(../upload/image_library/DM_Cover.jpg);
+      background-size: contain;
+      background-repeat: no-repeat;
+}
+
+@media (min-width:1400px) 
+{
+.m697_el1
+{
+      width: 727px;
+      height: 540px;
+}
+}
+
+@media (max-width:1399px)
+{
+.m697_el1
+{
+      width: 535px;
+      height: 392px;
+}
+}
+
+@media (min-width:960px) and (max-width:1399px)
+{
+.m697_el1
+{
+      width: 535px;
+      height: 392px;
+}
+}
+
+@media (max-width:959px)
+{
+.m697_el1
+{
+      width: 577px;
+      height: 423px;
+}
+}
+
+@media (min-width:768px) and (max-width:959px)
+{
+.m697_el1
+{
+      width: 577px;
+      height: 423px;
+}
+}
+
+@media (max-width:767px)
+{
+.m697_el1
+{
+      width: 577px;
+      height: 423px;
+}
+}
+
+@media (min-width:640px) and (max-width:767px)
+{
+.m697_el1
+{
+      width: 577px;
+      height: 423px;
+}
+}
+
+@media (max-width:639px)
+{
+.m697_el1
+{
+      width: 238px;
+      height: 171px;
+}
+}
+
+@media (min-width:480px) and (max-width:639px)
+{
+.m697_el1
+{
+      width: 238px;
+      height: 171px;
+}
+}
+
+@media (max-width:479px)
+{
+.m697_el1
+{
+      width: 275px;
+      height: 200px;
+}
+}
+

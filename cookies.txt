@@ -1,0 +1,4 @@
+# HTTrack Website Copier Cookie File
+# This file format is compatible with Netscape cookies
+www.wcm-partners.com	TRUE	/	FALSE	1999999999	JSESSIONID	FDDF8CB6563C0646CDAABDE498DD1CA9
+

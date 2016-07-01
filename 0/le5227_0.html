@@ -1,0 +1,38 @@
+
+function cls_CleanPopup(){this.title;this.titleBgColor;this.width;this.height;this.onCloseFx;this.showAlertImg;this.popupObj;this.contentArea;this.init=function(){var popupEl=cln_buildCleanPopup(this.title,this.width,this.height,this.onCloseFx,this.titleBgColor,this.popupObj)
+this.popupObj=popupEl.popup;this.contentArea=popupEl.contentArea;}
+
+this.showPopup=function(){this.popupObj.showPopup();}
+
+this.closePopup=function(){this.popupObj.closePopup();}
+
+}
+
+function cln_buildCleanPopup(title,width,height,onCloseFx,titleBgColor,popupObj){var drawBar=true;if(!title){title="";drawBar=false;}
+
+var popup=(!popupObj)?npop_getPopup():npop_getChildPopup(popupObj);popup.drawTitleBar=drawBar;popup.popupTitle=title;popup.buildCloseButton=true;popup.disableBackground=true;popup.fontColor="#666666";popup.bgImage="upload/js_globals/background_images/b9o_gradient_title_bar.gif";popup.bgColor="#F0F5F5";popup.closeFx=onCloseFx;popup.titleBackgroundColor=(titleBgColor)?titleBgColor:"white";popup.build();var holder=popup.contentArea;holder.style.backgroundColor="white";holder.style.width=width;if(height!=null){holder.style.height=height;}
+
+holder.style.padding=10;return {popup:popup,contentArea:holder}
+;}
+;
+
+function createDynFieldType(typeName,typeDisplay,uiType,tableName){var obj={typeName:typeName,typeDisplay:typeDisplay,uiType:uiType,tableName:tableName}
+;g_dynFieldTypeList.push(obj);var userType=uiType||typeName;g_fieldByUserType[userType]=obj;return obj;}
+
+var g_dynFieldTypeList=[];var g_fieldByUserType={}
+;{createDynFieldType("TEXT","Short Text");createDynFieldType("NAME","Name");createDynFieldType("C3","Category");createDynFieldType("MS3","Multi Select");createDynFieldType("TIMESTAMP","Time Stamp");createDynFieldType("LONG_TEXT","Long Text");createDynFieldType("DATE","Date");createDynFieldType("USERSTAMP","User Stamp");createDynFieldType("RECORD_NAME","Record Name");createDynFieldType("COLLECTION","Collection");createDynFieldType("INTEGER","Integer");createDynFieldType("DOUBLE","Double");createDynFieldType("FILE2","File2");createDynFieldType("TIME_TYPE_NAME","Time");createDynFieldType("RECORD_TYPE","Record Type");createDynFieldType("DATETIME","Date Time");createDynFieldType("BOOLEAN","Boolean");createDynFieldType("ARRAY","Array");createDynFieldType("RIL2","Record Id List 2");createDynFieldType("RECORD_ID_LIST","Record Id List !!!!!USE THIS ONE ONLY FOR OLD FEATURES!!!!!!!!!!!");createDynFieldType("TIME_ALLOCATION_TYPE","Time Allocation");createDynFieldType("MCL","MiniCache");createDynFieldType("URL","Url");createDynFieldType("TREE","Tree");createDynFieldType("RR","Responsive Range");var typeObj=createDynFieldType("RECORD_TYPE","Module","MODULE","module");typeObj.createRecord=true;createDynFieldType("RECORD_TYPE","Image","IMAGE","image_library");createDynFieldType("URL","Live Url","LIVEURL");}
+
+;;function buildNewFieldPopup(onClickFx,isHideFieldName){var popupBuilder=cln_buildCleanPopup("Add Table",450);var contentArea=popupBuilder.contentArea;var popup=popupBuilder.popup;var div=cE("div",contentArea);div.align="center";div.style.marginTop=20;var tBody=createTable(div);tBody.parentNode.cellPadding=5;if(!isHideFieldName){var tr=cE("tr",tBody);var td=cE("td",tr);td.align="right";td.className="text";td.innerHTML="Field Name";var td=cE("td",tr);td.style.paddingLeft=10;var pr={style:{width:250}
+}
+;var codeNameInput=buildTextInput(td,pr);}
+
+var tr=cE("tr",tBody);var td=cE("td",tr);td.align="right";td.className="text";td.innerHTML="Field Type";var td=cE("td",tr);td.style.paddingLeft=10;var options=[];for(var i=0;i<g_dynFieldTypeList.length;i++)
+{var display=g_dynFieldTypeList[i].typeName+" ("+g_dynFieldTypeList[i].typeDisplay+")";options.push(new dropdown_Option(display,g_dynFieldTypeList[i].typeName));}
+
+var fieldTypeDD=new dropdown_Dropdown(td,options,"",null,null,250);fieldTypeDD.init();var div=cE("div",contentArea);div.style.marginTop=25;div.align="center";var saveButton=cE("button",div);saveButton.style.marginRight=7;saveButton.innerHTML="Add Field";var onclickFx=function(){var fieldName=isHideFieldName?null:codeNameInput.value;var inputData={fieldName:fieldName,fieldType:fieldTypeDD.value}
+;onClickFx(inputData);popup.closePopup();}
+
+eh_attachEvent("onclick",saveButton,onclickFx);var cancelButton=cE("button",div);cancelButton.innerHTML="Cancel";var onclickFx=function(){popup.closePopup();}
+
+eh_attachEvent("onclick",cancelButton,onclickFx);popup.showPopup();}
+;{var sl_onAfterFx=sl_onAfterLoadFx['/0/le5227_0.js'];if(sl_onAfterFx){sl_onAfterFx();}}

@@ -1,0 +1,27 @@
+
+
+function EditableModule(pageObj){this.pageObj=g_specialModeData.pageObj;this.moduleId;this.moduleHolder;this.editLinkPopup;}
+
+EditableModule.prototype=new EditableModuleBase();function EditableModuleBase(){this.init=function(data){if(!data.path_var){return ;}
+
+this.attachEvents(data);this.moduleId=data.dbId;}
+;this.attachEvents=function(data){var moduleHolder=document.getElementById(data.elId);this.moduleHolder=moduleHolder;var thisObj=this;var overFx=function(event){thisObj.showEditLink();}
+;eh_attachOnMouseEnter(moduleHolder,overFx);}
+;this.handleHideEditLink=function(){this.editLinkPopup.close();}
+;this.makeUneditable=function(){this.moduleHolder.style.border="";this.editLinkPopup=null;}
+
+this.showEditLink=function(){if(this.editLinkPopup){return ;}
+
+this.moduleHolder.style.border="3px dashed #CCCCCC";var popup=new Popup();this.editLinkPopup=popup;var thisObj=this;popup.closeFx=function(){thisObj.makeUneditable();}
+;popup.setAsAnchor(this.moduleHolder,"upperRight");popup.zIndex=100000;var contentArea=popup.build();contentArea.style.padding="5px 25px";contentArea.style.backgroundColor="#FFF2CC";contentArea.style.border="1px solid black";var span=cE("span",contentArea);span.style.fontFamily="arial";span.style.fontSize="16px";span.style.fontWeight="bold";span.style.color="black";span.innerHTML="edit module";addUnderlineEvents(span);var thisObj=this;var fx=function(){thisObj.pageObj.launchModuleEditorPopup(thisObj);}
+;eh_attachEvent("onclick",span,fx);var borderWidth=CssUtil.pixelToInt(this.moduleHolder.style.borderTopWidth);popup.offsetTop=-(contentArea.offsetHeight+borderWidth);popup.offsetLeft=-borderWidth;popup.align();}
+;}
+;
+
+var EditableModuleHandler=new EditableModuleHandlerBase();function EditableModuleHandlerBase(){this.init=function(data){var module=new EditableModule();module.init(data);}
+;this.initHandler=function(){ATagInitializer.addSpecialModeHandler("template_based_page","module",this);}
+
+}
+
+
+;;EditableModuleHandler.initHandler();;{var sl_onAfterFx=sl_onAfterLoadFx['/0/le7473_0.js'];if(sl_onAfterFx){sl_onAfterFx();}}

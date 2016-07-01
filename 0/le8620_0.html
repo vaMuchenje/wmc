@@ -1,0 +1,70 @@
+
+function createGeneralExecuter(name,miniCache,instruction,basePackage){var gE=miniCache.createAction(name,"GXT");prepareGE(gE,instruction,basePackage);return gE;}
+
+function createGEToRunFirst(name,miniCache,instruction,basePackage){var gE=miniCache.createFirstAction(name,"GXT");prepareGE(gE,instruction,basePackage);return gE;}
+
+function createGEToRunLast(name,miniCache,instruction,basePackage){var gE=miniCache.createLastAction(name,"GXT");prepareGE(gE,instruction,basePackage);return gE;}
+
+function prepareGE(gE,instruction,basePackage){var instructions=gE.getChildField("instructions");instructions.addChildField(instruction,"TEXT",instruction);gE.getChildField("base_package").setValue(basePackage);}
+
+mc_typeToDefaultValue["GXT"]=function(){var gE=new DynField(null,{}
+,{}
+,null,null);gE.addChildField("instructions","COLLECTION");gE.addChildField("base_package","TEXT");gE.addChildField("exec_params","COLLECTION");return gE;}
+
+vfc_registerConverter("GXT",vfc_returnNoValue);
+mc_fieldTypeExtenders["GXT"]=function(dynField){dynField.getResults=function(){return this.getChildField("exec_res");}
+
+dynField.getResultByName=function(resName){return this.getChildField("exec_res").getChildField(resName)
+}
+
+dynField.addExecParamDynField=function(fieldType,dynField,name){if(null==name){name=dynField.name;}
+
+return this.getChildField("exec_params").insertChildField(name,fieldType,dynField);}
+
+dynField.addExecParamObj=function(name,fieldType,value){return this.getChildField("exec_params").addChildField(name,fieldType,value);}
+
+dynField.getExecParam=function(paramName){return this.getChildField("exec_params").getChildField(paramName);}
+
+}
+
+;
+function UrlValidator(urlStr,urlField){
+this.urlStr=urlStr.trim();
+this.urlField=urlField;
+this.saveOnValidate=true;}
+;UrlValidator.prototype=new UrlEditorBase();function UrlEditorBase(){
+this.validate=function(successFx,failFx){if(this.urlField!=null){if(this.urlStr==this.urlField.getChildField("friendly_url").getValue()){successFx();return ;}
+
+}
+;this.successFx=successFx;this.failFx=failFx;if(""==this.urlStr){this.save();return ;}
+
+var mc=new MiniCache();var gE=createGEToRunFirst("urlVal",mc,"UrlValidator");gE.addExecParamObj("friendlyUrl","TEXT",this.urlStr);gE.addExecParamObj("action","TEXT","validate");var thisObj=this;var onProcess=function(){var results=mc.getActionField("urlVal").getResults();var isSuccess=results.getChildField("success").getValue();var canOverwrite=results.getChildField("can_overwrite").getValue();if(!isSuccess&&canOverwrite){thisObj.source=results.getChildField("source");if(!confirm("This URL is already in use. Do you wish to overwrite it?")){thisObj.failFx();}
+
+else 
+{thisObj.deactivate();}
+
+}
+
+else if(!isSuccess&&!canOverwrite){alert("This URL is in use by the system and cannot be overwritten. Please select a new URL");thisObj.failFx();}
+
+else {thisObj.save();}
+
+}
+;mc.process(onProcess);}
+;
+this.deactivate=function(){var mc=(this.urlField!=null)?this.urlField.getOwnerCache():new MiniCache();var gE=createGEToRunFirst("urlDeactivate",mc,"UrlValidator");gE.addExecParamDynField("RECORD_TYPE",this.source,"source");gE.addExecParamObj("action","TEXT","deactivate");var thisObj=this;var onProcess=function(){var results=mc.getActionField("urlDeactivate").getResults();var isSuccess=results.getChildField("success").getValue();if(!isSuccess){alert("url deactivation failed");thisObj.failFx();}
+
+else 
+{thisObj.save();}
+
+}
+;mc.process(onProcess);}
+;
+this.prepUrlForSave=function(){this.urlField.getChildField("friendly_url").setValue(this.urlStr);}
+;
+this.save=function(){if(!this.saveOnValidate){this.successFx();return ;}
+
+var mc=this.urlField.getOwnerCache();this.prepUrlForSave();var thisObj=this;var onProcess=function(){thisObj.successFx();}
+;mc.process(onProcess);}
+;}
+;;{var sl_onAfterFx=sl_onAfterLoadFx['/0/le8620_0.js'];if(sl_onAfterFx){sl_onAfterFx();}}

@@ -1,0 +1,74 @@
+.m696_el1
+{
+      width: 414px;
+      height: 540px;
+      text-align: left;
+      vertical-align: top;
+      background-image: url(../upload/image_library/13-HKS-Print_Gov_540.jpg);
+      background-repeat: no-repeat;
+      background-size: contain;
+}
+
+@media (min-width:1400px) 
+{
+.m696_el1
+{
+      width: 414px;
+      height: 540px;
+}
+}
+
+@media (max-width:1399px)
+{
+.m696_el1
+{
+      width: 302px;
+      height: 392px;
+}
+}
+
+@media (min-width:960px) and (max-width:1399px)
+{
+.m696_el1
+{
+      width: 302px;
+      height: 392px;
+}
+}
+
+@media (max-width:959px)
+{
+.m696_el1
+{
+      width: 322px;
+      height: 423px;
+}
+}
+
+@media (min-width:768px) and (max-width:959px)
+{
+.m696_el1
+{
+      width: 322px;
+      height: 423px;
+}
+}
+
+@media (max-width:959px)
+{
+.m696_el2
+{
+      width: 577px;
+      height: 423px;
+}
+}
+
+@media (min-width:768px) and (max-width:959px)
+{
+.m696_el2
+{
+      width: 577px;
+      height: 423px;
+}
+}
+

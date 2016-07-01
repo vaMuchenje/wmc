@@ -1,0 +1,23 @@
+.m705_el1
+{
+      width: 100%;
+      height: 584px;
+      text-align: left;
+      vertical-align: top;
+}
+
+.m705_el2
+{
+      width: 407px;
+      height: 540px;
+}
+
+@media (min-width:1400px) 
+{
+.m705_el2
+{
+      width: 407px;
+      height: 540px;
+}
+}
+

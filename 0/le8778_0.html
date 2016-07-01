@@ -1,0 +1,38 @@
+
+function DefaultTransition(){this.gatesClassName;this.contentClassName;this.closeButtonClassName;this.timeOut=600;this.onOpen;this.onClose;}
+;DefaultTransition.prototype=new DefaultTransitionBase();function DefaultTransitionBase(){
+this.init=function(parentEl,htmlStr){this.parentEl=parentEl;this.parentEl.innerHTML="";var divDownGate=cE("div",parentEl);divDownGate.className=this.gatesClassName+" tr-gate-off";this.divDownGate=divDownGate;var divUpGate=cE("div",parentEl);divUpGate.className=this.gatesClassName+" tr-gate-off";this.divUpGate=divUpGate;this.appendHTMLcontent(htmlStr);var thisObj=this;var timeOutFunction;var fx=function(){thisObj.divUpGate.className=thisObj.gatesClassName+" tr-Up-gate-on";thisObj.divDownGate.className=thisObj.gatesClassName+" tr-Down-gate-on";thisObj.show(thisObj.htmlStr);clearTimeout(timeOutFunction);}
+;timeOutFunction=setTimeout(fx,thisObj.timeOut);}
+
+this.toogleIframes=function(displayProp){var iframes=this.divInfo.getElementsByTagName("iframe");for(var i=0;i<iframes.length;i++)
+{iframes[i].style.display=displayProp;}
+
+}
+
+
+this.appendHTMLcontent=function(htmlStr){var divInfo=cE("div",this.parentEl);divInfo.innerHTML="";divInfo.className="tr-contentOff";this.divInfo=divInfo;var closeDiv=cE("div",divInfo);closeDiv.className=this.closeButtonClassName;closeDiv.style.zIndex=CssUtil.getHighestZIndex();this.closeDiv=closeDiv;var thisObj=this;var onClick=function(){thisObj.closeFX();}
+;E.click(closeDiv,onClick);var contentEl=cE("div",this.divInfo);contentEl.className="tr-contentOff";contentEl.innerHTML=htmlStr;this.contentEl=contentEl;}
+
+
+this.show=function(){var trTimeOut;var thisObj=this;var fx=function(){thisObj.divInfo.className=thisObj.contentClassName+" tr-contentOn";thisObj.contentEl.className=thisObj.contentClassName+" tr-contentOn";thisObj.divUpGate.className=thisObj.gatesClassName+" tr-open-Up-gate";thisObj.divDownGate.className=thisObj.gatesClassName+" tr-open-Down-gate";var onOpenFX=function(){if(thisObj.onOpen){thisObj.onOpen();}
+
+var body=document.body;var scrollTop=(document.documentElement.scrollTop>0)?document.documentElement.scrollTop:body.scrollTop;thisObj.scrollTop=scrollTop;var posTop=scrollTop*-1+"px";body.style.position="fixed";body.style.top=posTop;body.style.overflowY="scroll";thisObj.closeDiv.style.zIndex=CssUtil.getHighestZIndex();E.remove(thisObj.divDownGate,"transitionend",onOpenFX);}
+
+E.add(thisObj.divDownGate,"transitionend",onOpenFX);clearTimeout(trTimeOut);}
+
+trTimeOut=setTimeout(fx,this.timeOut);}
+;
+this.closeFX=function(){if(this.onClose){this.onClose();}
+
+var thisObj=this;var timeOutFunction;var initCloseFX=function(){thisObj.divInfo.innerHTML="";thisObj.divUpGate.className=thisObj.gatesClassName+" tr-Up-gate-on";thisObj.divDownGate.className=thisObj.gatesClassName+" tr-Down-gate-on";thisObj.clearHTMLElements();clearTimeout(timeOutFunction);}
+
+timeOutFunction=setTimeout(initCloseFX,0);}
+
+
+this.clearHTMLElements=function(){var thisObj=this;var timeOutFunction;var finishCloseFx=function(){thisObj.divInfo.className=thisObj.contentClassName+" tr-contentOff";thisObj.divUpGate.className=thisObj.gatesClassName+" tr-gate-off";thisObj.divDownGate.className=thisObj.gatesClassName+" tr-gate-off";thisObj.divInfo.innerHTML="";var clearParentEl=function(){thisObj.divUpGate.removeEventListener('transitionend',clearParentEl,false);}
+
+var body=document.body;body.style.position="";body.style.top="";body.scrollTop=thisObj.scrollTop;document.documentElement.scrollTop=thisObj.scrollTop;this.scrollTop=0;thisObj.divUpGate.addEventListener('transitionend',clearParentEl,false);clearTimeout(timeOutFunction);}
+
+timeOutFunction=setTimeout(finishCloseFx,this.timeOut);}
+;}
+;{var sl_onAfterFx=sl_onAfterLoadFx['/0/le8778_0.js'];if(sl_onAfterFx){sl_onAfterFx();}}

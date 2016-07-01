@@ -1,0 +1,431 @@
+
+
+var HorizontalScroller=new HorizontalScrollerBase();function HorizontalScrollerBase(){this.init=function(actionData,data){var el=gE("#"+data.elId);this.currentTile=0;this.buildControls(el);var thisObj=this;var setWidth=function(){thisObj.showTile(null,el.firstElementChild);}
+;E.add(window,"resize",setWidth);}
+;
+this.buildControls=function(parentEl){var controls=cE("ul");controls.className="hs-tileControls";var thisObj=this;for(var i=0;i<2;i++)
+{var control=cE("li");if(i==0){control.className="hs-previousTile";this.previousControl=control;this.previousControl.style.display="none";}
+
+else 
+{control.className="hs-nextTile";this.nextControl=control;}
+
+var showTile=function(e){thisObj.showTile(e.target.className.replace("hs-",""),parentEl.firstElementChild);}
+;E.add(control,"click",showTile);aE(controls,control);}
+
+aE(parentEl,controls);}
+;
+this.showTile=function(movement,tileContainer){var currentMargin=(tileContainer.style.marginLeft=="")?0:0-parseInt(tileContainer.style.marginLeft.replace("px",""));var tileWidth=tileContainer.parentNode.offsetWidth;var lastMargin=currentMargin;if(null==movement){currentMargin=0-tileWidth*this.currentTile;tileContainer.style.marginLeft=currentMargin+"px";}
+
+else if(movement=="nextTile"){currentMargin+=tileWidth;this.currentTile++;}
+
+else 
+{currentMargin-=tileWidth;this.currentTile--;}
+
+if(currentMargin+tileWidth>=tileContainer.offsetWidth){currentMargin=tileContainer.offsetWidth-tileWidth;this.currentTile=(movement&&currentMargin<=lastMargin)?this.currentTile-1:this.currentTile;this.nextControl.style.display="none";this.previousControl.style.display="";}
+
+else if(currentMargin<=0){currentMargin=0;this.currentTile=0;this.previousControl.style.display="none";this.nextControl.style.display="";}
+
+else 
+{this.previousControl.style.display="";this.nextControl.style.display="";}
+
+currentMargin=0-currentMargin;tileContainer.style.marginLeft=currentMargin+"px";}
+;}
+;ActionHandler.registerAction("horizontalScroller",HorizontalScroller);
+CONTENT_MARKER_BEGIN='vml.41gp0Tj2tVtjpql';
+
+
+;function toggleNewsText(element,textId){var text=document.getElementById(textId);if(CssUtil.elHasClass(text,"show")){CssUtil.removeClassFromEl(text,"show");CssUtil.addClassToEl(text,"hide");element.innerHTML="view all";}
+
+else 
+{CssUtil.removeClassFromEl(text,"hide");CssUtil.addClassToEl(text,"show");element.innerHTML="view less";}
+
+}
+
+CONTENT_MARKER_END='vml.41gp0Tj2tVtjpql';
+
+CONTENT_MARKER_BEGIN='vml.41gp0PtjtUhuru-';
+
+
+var g_paginationJobs;var g_prevHTML;function navigationFx(data){data.navOp=(data.extras.arrow=="next")?"sum":"res";data.html=prepareJobsPopUp(data);var temporalParentEl=gE("#dynamic-content-holder")
+var temporalDiv=cE("div",temporalParentEl);temporalDiv.style.display="none";temporalDiv.innerHTML=data.html;var allDivs=temporalDiv.getElementsByTagName("div");var capItemsJobHTML=getElement("allJobsOpennings",allDivs);var jobsHolder=gE("#allJobsOpennings");jobsHolder.innerHTML=capItemsJobHTML.innerHTML;temporalDiv.remove();}
+
+function prepareJobsPopUp(data,onResize){var clientWith=document.getElementsByTagName("html")[0].clientWidth;     
+         
+      var numberOfJo;   
+      var isMobile = false;   
+      if(clientWith <= 768)   
+      {   
+            isMobile = true;   
+            numberOfJo = 3;   
+      }   
+      else if( clientWith >= 750 && clientWith<= 1352)   
+      {   
+            numberOfJo = 2;   
+      }   
+      else if( clientWith > 1352)   
+      {   
+            numberOfJo = 3;   
+      }   
+
+      var Op;      
+      Op = getOperator(Op, data, numberOfJo);      
+
+      var temporalParentEl = gE("#dynamic-content-holder")      
+      var temporalDiv = cE("div", temporalParentEl);      
+      temporalDiv.style.display = "none";      
+      temporalDiv.innerHTML = data.html;      
+
+      var allDivs = temporalDiv.getElementsByTagName("div");      
+      var HTMLJo = temporalDiv.getElementsByClassName("red-date");      
+
+      navigationConfig(numberOfJo, Op, allDivs);      
+
+      var HTMLJoLength = HTMLJo.length;      
+      for(var i=1; i<= HTMLJoLength; i++)      
+      {      
+            var iStr = i.toString();      
+            var jOId = "jo" + iStr;      
+
+            var jO = getElement(jOId, allDivs);      
+
+            if(jO != null)     
+            {     
+                  if (i ==1+Op)      
+                  {      
+                        jO.className = (numberOfJo == 2) ? "two-left-column" : "left-column";      
+                        continue;      
+                  }      
+                  else if(i ==2+Op)      
+                  {      
+                        jO.className = (numberOfJo == 2) ? "two-right-column" : "mid-column";      
+                        continue;      
+                  }      
+                  else if(i ==3+Op)      
+                  {      
+                        if(numberOfJo == 3)      
+                        {      
+                              jO.className = "right-column";      
+                              continue;      
+                        }      
+                        else      
+                        {      
+                              jO.remove();      
+                        }      
+                  }      
+                  else      
+                  {      
+                        jO.remove();      
+                  }      
+            }     
+      }      
+
+      if(isMobile)   
+      {           
+            var toDisapear = temporalDiv.getElementsByClassName("red-date");   
+            disapearDivs(toDisapear);   
+               
+            toDisapear = temporalDiv.getElementsByClassName("apply-now");   
+            disapearDivs(toDisapear);   
+
+            toDisapear = temporalDiv.getElementsByClassName("job-description");   
+            disapearDivs(toDisapear);           
+             
+            toggleClasses(temporalDiv, "job-name", "mobile-job-name"); 
+                   
+            desktopToMobile(temporalDiv);               
+            addAtribute(temporalDiv); 
+             
+            addRedButton(getElement("cap-item-jobs", allDivs), "redButon", "Send us your resume!", "redButton"); 
+      } 
+      
+      var toReturn = (onResize) ? getElement("cap-item-jobs", allDivs).innerHTML : temporalDiv.innerHTML;       
+      temporalDiv.remove();       
+                           
+      return toReturn;   
+}   
+
+function toggleClasses(parentEl, initClass, endClass) 
+{ 
+      var isFull = true; 
+      while(isFull) 
+      { 
+            var jobsNames = parentEl.getElementsByClassName(initClass); 
+            for(var i=0;i<jobsNames.length;i++) 
+            { 
+                  if(jobsNames!=null) 
+                  { 
+                        jobsNames[i].className = endClass; 
+                  } 
+            }                   
+            if(jobsNames.length == 0) 
+            { 
+                  isFull = false; 
+            } 
+      }  
+}       
+       
+function desktopToMobile(temporalDiv) 
+{ 
+      if(temporalDiv.getElementsByClassName("left-column")[0] != null) 
+      { 
+            temporalDiv.getElementsByClassName("left-column")[0].className = "top-mobile";    
+      } 
+      if(temporalDiv.getElementsByClassName("mid-column")[0] != null) 
+      { 
+            temporalDiv.getElementsByClassName("mid-column")[0].className = "middle-mobile";      
+      } 
+      if(temporalDiv.getElementsByClassName("right-column")[0] != null) 
+      { 
+            temporalDiv.getElementsByClassName("right-column")[0].className = "down-mobile";      
+      }    
+}   
+        
+function showDescription( jobId )  
+{debugger;  
+      var itemsJobs = gE("#cap-item-jobs"); 
+      g_prevHTML = itemsJobs.innerHTML; 
+        
+      var parentEl = itemsJobs.parentElement; 
+      itemsJobs.style.display = "none"; 
+       
+      if(gE("#back")==null) 
+      { 
+            var back = cE("div", parentEl); 
+            back.className = "job-previous"; 
+            back.id = "back"; 
+       
+            var prevConfig = gE("#job-previous").style.display;
+            var nextConfig = gE("#job-next").style.display;   
+      
+            sA(back, "onclick", "backFx('" + prevConfig +","+ nextConfig + "')"); 
+      }  
+          
+      var descriptionDiv = cE("div", parentEl); 
+      descriptionDiv.className = "mobile-job-description"; 
+
+      var temporalParentEl = gE("#dynamic-content-holder") 
+      var temporalDiv = cE("div", temporalParentEl); 
+      temporalDiv.style.display = "none"; 
+       
+      var data = gE(_.html#"+ jobId); 
+       
+      temporalDiv.innerHTML = data.innerHTML; 
+      temporalDiv.getElementsByClassName("red-date")[0].style.display = "block"; 
+       
+      var jobDescription = temporalDiv.getElementsByClassName("job-description")[0]; 
+       
+      jobDescription.style.display = "block"; 
+      jobDescription.className = "mobile-job-descrption";       
+         
+      addRedButton(parentEl, "apply-redButon", "apply now", "apply-redButton"); 
+             
+      toggleClasses(temporalDiv, "mobile-job-name", "job-name"); 
+             
+      gE("#job-previous").style.display = "none"; 
+      gE("#job-next").style.display = "none";       
+       
+      descriptionDiv.innerHTML = temporalDiv.innerHTML;       
+      temporalDiv.remove();                  
+} 
+
+function backFx(navConfig) 
+{ 
+      var itemsJobs = gE("#cap-item-jobs"); 
+      itemsJobs.innerHTML = g_prevHTML; 
+      itemsJobs.style.display = "block";     
+       
+      gE(".mobile-job-description").remove(); 
+        
+      if(gE("#apply-redButton") == null) 
+      { 
+            addRedButton(itemsJobs.parentElement, "redButon", "Send us your resume!", "redButton"); 
+      }
+      else
+      {
+            gE("#apply-redButton").remove();
+      }       
+       
+      gE("#back").remove(); 
+       
+      var navConfigArray = navConfig.split(",");
+      
+      gE("#job-previous").style.display = navConfigArray[0]; 
+      gE("#job-next").style.display = navConfigArray[1];  
+} 
+
+function addRedButton(parentEl, cssClass, txt, id) 
+{              
+      var redButton = cE("div",  parentEl);              
+      redButton.className = cssClass;  
+      redButton.id = id; 
+       
+      redButton.innerHTML = '<a class = "mail-to-style-mobile" href="mailto:info@wcm-partners.com">' + txt + '</a>'; 
+} 
+        
+function addAtribute(temporalDiv) 
+{ 
+      var jobsNamesLength = temporalDiv.getElementsByClassName("mobile-job-name").length; 
+          
+      for(var i=0; i<jobsNamesLength; i++) 
+      { 
+            jobName = temporalDiv.getElementsByClassName("mobile-job-name")[i]; 
+            var jobId = jobName.parentElement.id;  
+            sA(jobName, "onclick", "showDescription('" + jobId +"' )");  
+      } 
+}        
+         
+disapearDivs = function(array)   
+{   
+      for(var i=0; i < array.length; i++)   
+      {    
+            array[i].style.display = "none";   
+      }   
+}   
+
+navigationConfig = function(numberOfJo, Op, allDivs)      
+{      
+      var hasNextId = numberOfJo + Op + 1;      
+      var hasNextIdStr = hasNextId.toString();      
+      var id = "jo"+ hasNextIdStr;      
+
+      var nextJob =  getElement(id, allDivs);      
+            
+      gE("#job-next").style.display = (nextJob == null) ? "none" : "block";          
+      gE("#job-previous").style.display = (Op == 0) ? "none" : "block"; 
+              
+      getElement("job-next", allDivs).style.display = (nextJob == null) ? "none" : "block";  
+      getElement("job-previous", allDivs).style.display = (Op == 0) ? "none" : "block"; 
+}      
+
+getOperator = function(Op, data, numberOfJo)      
+{      
+      if(data.navOp == "sum")      
+      {      
+            g_paginationJobs++;      
+      }      
+      else if(data.navOp == "res")      
+      {      
+            g_paginationJobs--;      
+      }      
+      else      
+      {      
+            Op = 0;      
+            g_paginationJobs = 0;      
+      }      
+
+      Op = numberOfJo * g_paginationJobs;      
+      return Op;      
+}      
+
+getElement = function(id, array)      
+{      
+      for(var i = 0; i < array.length; i++)      
+      {      
+            if(array[i].id == id)      
+            {      
+                  return array[i];      
+            }      
+      }      
+}      
+               
+Element.prototype.remove = function()      
+{      
+    this.parentElement.removeChild(this);      
+}      
+
+NodeList.prototype.remove = HTMLCollection.prototype.remove = function()      
+{      
+      for(var i = 0, len = this.length; i < len; i++)          
+      {          
+            if(this[i] && this[i].parentElement)          
+            {          
+                  this[i].parentElement.removeChild(this[i]);          
+            }          
+      }          
+}
+CONTENT_MARKER_END='vml.41gp0PtjtUhuru-';
+
+CONTENT_MARKER_BEGIN='vml.41gp0Sf-ugwSjllMqjznimk2h-';
+
+function MasterPageInitializer(){
+this.init=function(){var homeLink=gE("#home-link");this.attachClickToNavItem(homeLink);var workLink=gE("#work-link");this.attachClickToNavItem(workLink);var thisObj=this;var onTimeOut=function(){var hashValue=window.location.hash;if(""!=hashValue){thisObj.showSection(hashValue);}
+
+thisObj.initContactAreaLinks();}
+
+setTimeout(onTimeOut,2000);}
+;this.initWorkMondrian=function(){var gridHeightMap={xl:.9,l:.6,m:.9,s:.9}
+;var thisObj=this;debugger;var resizeFx=function(){debugger;var curSize=ResponsiveUtil.getCurrentSize();var ratio=gridHeightMap[curSize];var innerWidth=window.innerWidth;var gridEl=gE(".pc-grid");gridEl.style.height=innerWidth*ratio+"px";}
+;E.resize(resizeFx);resizeFx();}
+;this.initContactAreaLinks=function(){var formLink=gE("#link-to-form");var onClick=function(){$('html, body').stop().animate({scrollTop:$(".contact-form-holder").offset().top-70}
+,800);}
+
+E.click(formLink,onClick);var mapLink=gE("#link-to-map");var onClick=function(){$('html, body').stop().animate({scrollTop:$(".contact-location").offset().top-70}
+,800);}
+
+E.click(mapLink,onClick);}
+;this.attachClickToNavItem=function(linkEl){var clickFx=function(){if(g_masterPageInit.transition){g_masterPageInit.toggleBodyScroll(false);g_masterPageInit.transition.closeFX();}
+
+SiteNavigation.scrollToView(linkEl);}
+;E.click(linkEl,clickFx);}
+;
+this.initTransition=function(data,parentElClassName,contentClassName,gatesClassName){debugger;var parentEl=gE("#dynamic-content-holder");parentEl.className=parentElClassName+" active-layover";var tr=new WCMTransition();this.transition=tr;tr.contentClassName=contentClassName;tr.gatesClassName=gatesClassName;tr.closeImgPath="../upload/image_library/close-icon.png";var thisObj=this;tr.onClose=function(){debugger;var prevUrl=data.extras.prevUrl;var prevPageTitle=data.extras.prevTitle;document.title=prevPageTitle;if(history.replaceState){history.replaceState(null,prevPageTitle,prevUrl);}
+
+thisObj.toggleBodyScroll(false);var onTrEn=function(){gE("#dynamic-content-holder").className="inactive-layover";clearTimeout(thisObj.tto);thisObj.transition=null;}
+
+thisObj.tto=setTimeout(onTrEn,2500);}
+;tr.onOpen=function(){debugger;thisObj.toggleBodyScroll(true);}
+;tr.init(parentEl,data.html);}
+;this.toggleBodyScroll=function(isDisable){var body=document.body;var mainContent=gE("#main-content");var isIOS=B.isIOS();if(isIOS){return ;}
+
+if(isDisable){var scrollTop=(document.documentElement.scrollTop>0)?document.documentElement.scrollTop:body.scrollTop;this.scrollTop=scrollTop;var posTop=scrollTop*-1+"px";body.style.position="fixed";body.style.top=posTop;body.style.height=window.innerHeight-1+"px";body.style.overflowY="scroll";}
+
+else 
+{body.style.position="";body.style.top="";body.style.height="";body.scrollTop=this.scrollTop;document.documentElement.scrollTop=this.scrollTop;this.scrollTop=0;}
+
+}
+;this.showSection=function(url){SiteNavigation.pushUrlIntoView(url.replace("#","/"));}
+;}
+;var g_masterPageInit;function buildScreen(){if(window["SiteNavigation"]==undefined){return ;}
+
+SiteNavigation.afterInit=function(){var masterPage=new MasterPageInitializer();masterPage.init();g_masterPageInit=masterPage;}
+
+}
+
+
+function launchPageView(data){var parentElClassName="";var contentClassName="";var gatesClassName="";switch(data.extras.type){
+case"work":
+parentElClassName="transitionWorkParentEl";contentClassName="transitionWorkPopUp";gatesClassName="workGates";break;case"people":
+parentElClassName="transitionPeopleParentEl";contentClassName="transitionOurPeoplePopUp";gatesClassName="peopleGates";break;case"experience":
+parentElClassName="transitionExperienceParentEl";contentClassName="transitionExperiencePopUp";gatesClassName="experienceGates";break;case"privacy":
+parentElClassName="transitionPrivacyParentEl";contentClassName="transitionPrivacyPopUp";gatesClassName="privacyGates";break;}
+
+g_masterPageInit.initTransition(data,parentElClassName,contentClassName,gatesClassName);}
+;function closePopup(){if(g_masterPageInit.transition){g_masterPageInit.toggleBodyScroll(false);g_masterPageInit.transition.closeFX();}
+
+if(window.innerWidth<=767){toggleNav();}
+
+}
+
+function toggleNav(){var mobileNavigation=gE("#primary-nav");var mainContent=gE("#main-content");if(CssUtil.elHasClass(mobileNavigation,"show-mobile-navigation")){mobileNavigation.style.left="100%";mainContent.style.left="0px";CssUtil.removeClassFromEl(mobileNavigation,"show-mobile-navigation");}
+
+else 
+{mobileNavigation.style.left="-webkit-calc(100% - 200px)";mobileNavigation.style.left="-moz-calc(100% - 200px)";mobileNavigation.style.left="calc(100% - 200px)";mainContent.style.left="-200px";CssUtil.addClassToEl(mobileNavigation,"show-mobile-navigation");}
+
+}
+
+function toggleHomeText(){var mq=window.matchMedia("(max-width: 479px)");if(mq.matches){var homeText=document.getElementById('mg-home-text');var bgLayer=document.getElementById('bg-layer');var arrow=document.getElementById('mg-mobile-arrow');if(CssUtil.elHasClass(arrow,"mg-arrow-down")){CssUtil.removeClassFromEl(arrow,"mg-arrow-down");CssUtil.addClassToEl(arrow,"mg-arrow-up");arrow.style.top="295px";homeText.style.opacity="1";bgLayer.style.opacity="0.8";}
+
+else if(CssUtil.elHasClass(arrow,"mg-arrow-up")){CssUtil.removeClassFromEl(arrow,"mg-arrow-up");CssUtil.addClassToEl(arrow,"mg-arrow-down");arrow.style.top="130px";homeText.style.opacity="0";bgLayer.style.opacity="0";}
+
+}
+
+}
+
+var onResize=function(){var mq=window.matchMedia("(min-width: 768px)");var mainContent=gE("#main-content");var mobileNavigation=gE("#primary-nav");if(mq.matches){mainContent.style.left="0px";}
+
+else if(CssUtil.elHasClass(mobileNavigation,"show-mobile-navigation")){mainContent.style.left="-200px";}
+
+}
+
+E.add(window,"resize",onResize);
+CONTENT_MARKER_END='vml.41gp0Sf-ugwSjllMqjznimk2h-';

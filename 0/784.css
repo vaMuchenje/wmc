@@ -1,0 +1,186 @@
+.m724_el1
+{
+      width: 960px;
+      height: 540px;
+      text-align: left;
+      vertical-align: top;
+      background-color: #000000;
+}
+
+@media (min-width:1400px) 
+{
+.m724_el1
+{
+      width: 960px;
+      height: 540px;
+}
+}
+
+@media (max-width:1399px)
+{
+.m724_el1
+{
+      width: 697px;
+      height: 392px;
+}
+}
+
+@media (min-width:960px) and (max-width:1399px)
+{
+.m724_el1
+{
+      width: 697px;
+      height: 392px;
+}
+}
+
+@media (max-width:959px)
+{
+.m724_el1
+{
+      width: 748px;
+      height: 423px;
+}
+}
+
+@media (min-width:768px) and (max-width:959px)
+{
+.m724_el1
+{
+      width: 748px;
+      height: 423px;
+}
+}
+
+@media (max-width:639px)
+{
+.m724_el1
+{
+      width: 200px;
+      height: 171px;
+}
+}
+
+@media (min-width:480px) and (max-width:639px)
+{
+.m724_el1
+{
+      width: 200px;
+      height: 171px;
+}
+}
+
+@media (max-width:479px)
+{
+.m724_el1
+{
+      width: 200px;
+      height: 200px;
+}
+}
+
+.m724_el2
+{
+      width: 100.00032000000002%;
+      height: 540px;
+      left: 0%;
+      top: 0px;
+      z-index: 11;
+}
+
+@media (min-width:1400px) 
+{
+.m724_el2
+{
+      width: 100.00032000000002%;
+      height: 540px;
+      left: 0%;
+      top: 0px;
+      z-index: 11;
+}
+}
+
+@media (max-width:1399px)
+{
+.m724_el2
+{
+      width: 100.00032000000002%;
+      height: 390px;
+      left: 0%;
+      top: 0px;
+      z-index: 13;
+}
+}
+
+@media (min-width:960px) and (max-width:1399px)
+{
+.m724_el2
+{
+      width: 100.00032000000002%;
+      height: 390px;
+      left: 0%;
+      top: 0px;
+      z-index: 13;
+}
+}
+
+@media (max-width:959px)
+{
+.m724_el2
+{
+      width: 100.00032000000002%;
+      height: 420px;
+      left: 0%;
+      top: 0px;
+      z-index: 37;
+}
+}
+
+@media (min-width:768px) and (max-width:959px)
+{
+.m724_el2
+{
+      width: 100.00032000000002%;
+      height: 420px;
+      left: 0%;
+      top: 0px;
+      z-index: 37;
+}
+}
+
+@media (max-width:639px)
+{
+.m724_el2
+{
+      width: 100.00032000000002%;
+      height: 170px;
+      left: 0%;
+      top: 0px;
+      z-index: 33;
+}
+}
+
+@media (min-width:480px) and (max-width:639px)
+{
+.m724_el2
+{
+      width: 100.00032000000002%;
+      height: 170px;
+      left: 0%;
+      top: 0px;
+      z-index: 33;
+}
+}
+
+@media (max-width:479px)
+{
+.m724_el2
+{
+      width: 100.00032000000002%;
+      height: 200px;
+      left: 0%;
+      top: 0px;
+      z-index: 35;
+}
+}
+

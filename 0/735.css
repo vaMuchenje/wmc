@@ -1,0 +1,38 @@
+.m675_el1
+{
+      min-width: 400px;
+      min-height: 600px;
+      text-align: left;
+      vertical-align: top;
+      background-image: url(../upload/image_library/WCM_Bert_home_Print_540-O.jpg);
+      background-size: cover;
+      background-repeat: no-repeat;
+}
+
+@media (min-width:1400px) 
+{
+.m675_el1
+{
+      min-width: 400px;
+}
+}
+
+.m675_el2
+{
+      min-width: 400px;
+      min-height: 600px;
+      text-align: left;
+      vertical-align: top;
+      background-image: url(../upload/image_library/WCM_Bert_lunch_Print_540-O.jpg);
+      background-size: cover;
+      background-repeat: no-repeat;
+}
+
+@media (min-width:1400px) 
+{
+.m675_el2
+{
+      min-width: 400px;
+}
+}
+

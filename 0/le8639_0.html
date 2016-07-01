@@ -1,0 +1,3 @@
+
+function createModuleDuplicator(fieldName,miniCache,moduleId,moduleName,modulePackage){var duplicator=createGEToRunFirst(fieldName,miniCache,"ModuleDuplicator");var params=duplicator.getChildField("exec_params");params.addChildField("id","INTEGER",moduleId);params.addChildField("package","TEXT",modulePackage);params.addChildField("name","TEXT",moduleName);return duplicator;}
+;{var sl_onAfterFx=sl_onAfterLoadFx['/0/le8639_0.js'];if(sl_onAfterFx){sl_onAfterFx();}}

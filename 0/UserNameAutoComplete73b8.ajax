@@ -1,0 +1,11 @@
+var list = new Array();
+var fields = [];fields.membership_number='';fields.name={'last_name':'','first_name':'','suffix':'','middle_name':'','prefix':''};list.push(new to_UserInfo(14,'',fields));
+var fields = [];fields.membership_number='';fields.name={'last_name':'Admin','first_name':'Admin','suffix':'','middle_name':'','prefix':''};list.push(new to_UserInfo(5,'Admin Admin',fields));
+var fields = [];fields.membership_number='';fields.name={'last_name':'Olaru','first_name':'Adrian','suffix':'','middle_name':'','prefix':''};list.push(new to_UserInfo(3,'Adrian Olaru',fields));
+var fields = [];fields.membership_number='';fields.name={'last_name':'Taylor','first_name':'Alejandro','suffix':'','middle_name':'','prefix':''};list.push(new to_UserInfo(1,'Alejandro Taylor',fields));
+var fields = [];fields.membership_number='';fields.name={'last_name':'Witt','first_name':'Evan','suffix':'','middle_name':'','prefix':''};list.push(new to_UserInfo(4,'Evan Witt',fields));
+var fields = [];fields.membership_number='';fields.name={'last_name':'Labs','first_name':'Eximo','suffix':'','middle_name':'','prefix':''};list.push(new to_UserInfo(2,'Eximo Labs',fields));
+var fields = [];fields.membership_number='';fields.name={'last_name':'Boyce','first_name':'Tim','suffix':'','middle_name':'','prefix':''};list.push(new to_UserInfo(13,'Tim Boyce',fields));
+var fields = [];fields.membership_number='';fields.name={'last_name':'','first_name':'','suffix':'','middle_name':'','prefix':''};list.push(new to_UserInfo(14,'',fields));
+var fields = [];fields.membership_number='';fields.name={'last_name':'Admin','first_name':'Admin','suffix':'','middle_name':'','prefix':''};list.push(new to_UserInfo(5,'Admin Admin',fields));
+var fields = [];fields.membership_number='';fields.name={'last_name':'Boyce','first_name':'Tim','suffix':'','middle_name':'','prefix':''};list.push(new to_UserInfo(13,'Tim Boyce',fields));

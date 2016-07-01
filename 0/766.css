@@ -1,0 +1,83 @@
+.m706_el1
+{
+      width: 407px;
+      height: 540px;
+      text-align: left;
+      vertical-align: top;
+      background-image: url(../upload/image_library/Summer_POM_2_ad_540.jpg);
+      background-size: contain;
+      background-repeat: no-repeat;
+}
+
+@media (min-width:1400px) 
+{
+.m706_el1
+{
+      width: 407px;
+      height: 540px;
+}
+}
+
+@media (max-width:1399px)
+{
+.m706_el1
+{
+      width: 302px;
+      height: 392px;
+}
+}
+
+@media (min-width:960px) and (max-width:1399px)
+{
+.m706_el1
+{
+      width: 302px;
+      height: 392px;
+}
+}
+
+@media (max-width:959px)
+{
+.m706_el1
+{
+      width: 324px;
+      height: 423px;
+}
+}
+
+@media (min-width:768px) and (max-width:959px)
+{
+.m706_el1
+{
+      width: 324px;
+      height: 423px;
+}
+}
+
+@media (max-width:639px)
+{
+.m706_el1
+{
+      width: 133px;
+      height: 171px;
+}
+}
+
+@media (min-width:480px) and (max-width:639px)
+{
+.m706_el1
+{
+      width: 133px;
+      height: 171px;
+}
+}
+
+@media (max-width:479px)
+{
+.m706_el1
+{
+      width: 156px;
+      height: 200px;
+}
+}
+
